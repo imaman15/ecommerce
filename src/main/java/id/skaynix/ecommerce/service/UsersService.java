@@ -5,6 +5,7 @@ import id.skaynix.ecommerce.exception.BadRequestException;
 import id.skaynix.ecommerce.exception.ResourceNotFoundException;
 import id.skaynix.ecommerce.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,6 +16,9 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Users findById(String id){
         return usersRepository.findById(id)
@@ -39,6 +43,7 @@ public class UsersService {
             throw new BadRequestException("Email " + users.getEmail() + " sudah terdaftar.");
         }
 
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         users.setIsActive(true);
         return usersRepository.save(users);
     }
@@ -50,6 +55,8 @@ public class UsersService {
         if (!StringUtils.hasText(users.getEmail())) {
             throw new BadRequestException("Email harus diisi.");
         }
+
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         return usersRepository.save(users);
     }
 

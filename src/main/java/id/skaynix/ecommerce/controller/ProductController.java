@@ -1,15 +1,16 @@
 package id.skaynix.ecommerce.controller;
 
-import id.skaynix.ecommerce.entity.Category;
 import id.skaynix.ecommerce.entity.Product;
 import id.skaynix.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@PreAuthorize("isAuthenticated()")
 public class ProductController {
 
     @Autowired

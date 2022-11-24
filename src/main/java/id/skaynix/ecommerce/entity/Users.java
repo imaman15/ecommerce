@@ -1,5 +1,6 @@
 package id.skaynix.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ public class Users implements Serializable {
 
     @Id
     private String id;
+    @JsonIgnore
     private String password;
     private String name;
     private String address;
