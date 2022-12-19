@@ -18,10 +18,15 @@ public class Users implements Serializable {
     @JsonIgnore
     private String password;
     private String name;
+    @JsonIgnore
     private String address;
+    @JsonIgnore
     private String email;
+    @JsonIgnore
     private String phone;
+    @JsonIgnore
     private String roles;
+    @JsonIgnore
     private Boolean isActive;
 
     public Users(String username) {

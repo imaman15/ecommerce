@@ -59,7 +59,7 @@ public class CartService {
         Cart cart = cartRepository.findByUsersIdAndProductId(username, productId)
                 .orElseThrow(() -> new BadRequestException(
                         "Product ID " + productId + " not found in your cart."));
-        cart.setQuantity(cart.getQuantity() + quantity);
+        cart.setQuantity(quantity);
         cart.setAmount(new BigDecimal(cart.getPrice().doubleValue() * cart.getQuantity()));
         cartRepository.save(cart);
         return cart;
